@@ -31,7 +31,7 @@ barplot(
     PM2.5_total_emission$Emissions,
     PM2.5_total_emission$year,    
 	main="total emissions from PM2.5 in the United States", 
-	ylab = "Total PM2.5 emission from all sources",
+	ylab = "Total PM2.5 emission from all sources (tons)",
 	xlab="Year",
     names.arg = PM2.5_total_emission$year    
 	)

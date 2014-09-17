@@ -21,3 +21,5 @@ if (!exists("SCC") | !exists("NEI")) {
 	NEI$fips <- as.factor(NEI$fips)
 	NEI$type <- as.factor(NEI$type)
 }
+
+# 4. Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?

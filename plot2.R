@@ -31,9 +31,9 @@ barplot(
     PM2.5_total_Baltimore$year,
 	col = "green",
 	main="PM2.5 emissions in Baltimore City, Maryland ", 
-	ylab = "PM2.5 emission",
+	ylab = "PM2.5 emission (tons)",
 	xlab="Year",
-    axisnames = TRUE
+    names.arg = PM2.5_total_emission$year    
 	)
 dev.copy(png,"plot2.png", width = 480, height = 480, bg = "transparent")
 dev.off()

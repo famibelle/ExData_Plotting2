@@ -27,16 +27,17 @@ install.packages("ggplot2")
 library(ggplot2)
 
 PM2.5_Baltimore <- subset(NEI, fips == "24510")
-qplot(
-    year,
-    Emissions,		
-    data = PM2.5_Baltimore,
-    facets = . ~ type,
-    geom = c("point", "smooth"),
-    method = "lm",
-    color = type,
-    base_family = "Times" # add a nice theme :-)
-    )
+PM2.5_Baltimore = transform(PM2.5_Baltimore, year = factor(year))
+
+plot3 <- ggplot(PM2.5_Baltimore,aes(year,Emissions,fill=type)) 
+plot3 <- plot3 + geom_bar(stat="identity") 
+plot3 <- plot3 + theme(axis.text.x=element_text(angle=90)) #rotate the x units by 90 degrees
+plot3 <- plot3 + guides(fill=FALSE) #remove the duplicate type legend (already in the facet title)
+plot3 <- plot3 + facet_grid(.~type)
+plot3 <- plot3 + labs(x="year", y="Total PM2.5 Emission (Tons)")
+plot3 <- plot3 + labs(title="PM2.5 Emissions, Baltimore City by Source Type")
+
+print(plot3)
 
 dev.copy(png,"plot3.png", width = 480, height = 480, bg = "transparent")
 dev.off()
