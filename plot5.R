@@ -22,6 +22,6 @@ if (!exists("SCC") | !exists("NEI")) {
 	NEI$type <- as.factor(NEI$type)
 }
 
-# Across the United States, how have emissions from coal combustion-related sources 
-# changed from 1999-2008?
+# 5. How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City?
 merged_data <- merge(SCC, NEI)
+

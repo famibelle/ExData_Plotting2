@@ -22,5 +22,4 @@ if (!exists("SCC") | !exists("NEI")) {
 	NEI$type <- as.factor(NEI$type)
 }
 
-# 4. Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
-merged_data <- merge(SCC, NEI)
+# 6. Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
