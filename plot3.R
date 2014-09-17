@@ -22,19 +22,21 @@ if (!exists("SCC") | !exists("NEI")) {
 	NEI$type <- as.factor(NEI$type)
 }
 
-# Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? 
-# Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+#Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999–2008 for Baltimore City? Which have seen increases in emissions from 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.
+install.packages("ggplot2")
+library(ggplot2)
 
-PM2.5_total_emission <- aggregate(Emissions ~ year,NEI, sum)
+PM2.5_Baltimore <- subset(NEI, fips == "24510")
+qplot(
+    year,
+    Emissions,		
+    data = PM2.5_Baltimore,
+    facets = . ~ type,
+    geom = c("point", "smooth"),
+    method = "lm",
+    color = type,
+    base_family = "Times" # add a nice theme :-)
+    )
 
-barplot(
-    PM2.5_total_emission$Emissions,
-    PM2.5_total_emission$year,    
-	main="total emissions from PM2.5 in the United States", 
-	ylab = "Total PM2.5 emission from all sources",
-	xlab="Year",
-    names.arg = PM2.5_total_emission$year    
-	)
-
-dev.copy(png,"plot1.png", width = 480, height = 480, bg = "transparent")
+dev.copy(png,"plot3.png", width = 480, height = 480, bg = "transparent")
 dev.off()

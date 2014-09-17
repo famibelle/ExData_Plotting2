@@ -22,19 +22,18 @@ if (!exists("SCC") | !exists("NEI")) {
 	NEI$type <- as.factor(NEI$type)
 }
 
-# Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? 
-# Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+# Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
 
-PM2.5_total_emission <- aggregate(Emissions ~ year,NEI, sum)
-
+PM2.5_total_Baltimore <- aggregate(subset(NEI, fips == "24510")$Emissions ~ subset(NEI, fips == "24510")$year,NEI, sum)
+names(PM2.5_total_Baltimore) <- names(PM2.5_total_emission)
 barplot(
-    PM2.5_total_emission$Emissions,
-    PM2.5_total_emission$year,    
-	main="total emissions from PM2.5 in the United States", 
-	ylab = "Total PM2.5 emission from all sources",
+    PM2.5_total_Baltimore$Emissions,
+    PM2.5_total_Baltimore$year,
+	col = "green",
+	main="PM2.5 emissions in Baltimore City, Maryland ", 
+	ylab = "PM2.5 emission",
 	xlab="Year",
-    names.arg = PM2.5_total_emission$year    
+    axisnames = TRUE
 	)
-
-dev.copy(png,"plot1.png", width = 480, height = 480, bg = "transparent")
+dev.copy(png,"plot2.png", width = 480, height = 480, bg = "transparent")
 dev.off()

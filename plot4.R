@@ -21,20 +21,3 @@ if (!exists("SCC") | !exists("NEI")) {
 	NEI$fips <- as.factor(NEI$fips)
 	NEI$type <- as.factor(NEI$type)
 }
-
-# Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? 
-# Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
-
-PM2.5_total_emission <- aggregate(Emissions ~ year,NEI, sum)
-
-barplot(
-    PM2.5_total_emission$Emissions,
-    PM2.5_total_emission$year,    
-	main="total emissions from PM2.5 in the United States", 
-	ylab = "Total PM2.5 emission from all sources",
-	xlab="Year",
-    names.arg = PM2.5_total_emission$year    
-	)
-
-dev.copy(png,"plot1.png", width = 480, height = 480, bg = "transparent")
-dev.off()
