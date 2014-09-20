@@ -23,4 +23,20 @@ if (!exists("SCC") | !exists("NEI")) {
 }
 
 # 4. Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
-merged_data <- merge(SCC, NEI)
+SCC_Coal_Related <- SCC[grepl("coal", SCC$Short.Name, ignore.case = TRUE),]
+NEI_Coal_related <- NEI[NEI$SCC %in% SCC_Coal_Related$SCC,]
+
+# Plot the data
+library(ggplot2)
+
+plot4 <- ggplot(NEI_Coal_related,aes(year,Emissions)) 
+plot4 <- plot4 + geom_bar(stat="identity")
+plot4 <- plot4 + theme(axis.text.x=element_text(angle=90)) #rotate the x units by 90 degrees
+plot4 <- plot4 + guides(fill=FALSE) #remove the duplicate type legend (already in the facet title)
+plot4 <- plot4 + labs(x="year", y="Total PM2.5 Emission (Tons)")
+plot4 <- plot4 + labs(title="Emissions from coal combustion-related sources")
+
+print(plot4)
+
+dev.copy(png,"plot4.png", width = 480, height = 480, bg = "transparent")
+dev.off()

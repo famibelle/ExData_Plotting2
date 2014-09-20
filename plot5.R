@@ -23,5 +23,24 @@ if (!exists("SCC") | !exists("NEI")) {
 }
 
 # 5. How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City?
-merged_data <- merge(SCC, NEI)
+
+SCC_Motor_Related <- SCC[grepl("vehicles", SCC$EI.Sector, ignore.case = TRUE),]
+NEI_Motor_related <- NEI[NEI$SCC %in% SCC_Motor_Related$SCC,]
+
+NEI_Motor_related_Baltimore <- subset(NEI_Motor_related, fips == "24510")
+NEI_Motor_related_Baltimore_Total <- aggregate(Emissions~year,NEI_Motor_related_Baltimore,sum)
+# Plot the data
+library(ggplot2)
+
+plot5 <- ggplot(NEI_Motor_related_Baltimore_Total,aes(year,Emissions)) 
+plot5 <- plot5 + geom_bar(stat="identity")
+plot5 <- plot5 + theme(axis.text.x=element_text(angle=90)) #rotate the x units by 90 degrees
+plot5 <- plot5 + guides(fill=FALSE) #remove the duplicate type legend (already in the facet title)
+plot5 <- plot5 + labs(x="year", y="Total PM2.5 Emission (Tons)")
+plot5 <- plot5 + labs(title="Emissions from motor vehicles related sources in Baltimore")
+
+print(plot5)
+
+dev.copy(png,"plot5.png", width = 480, height = 480, bg = "transparent")
+dev.off()
 
