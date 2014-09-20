@@ -53,5 +53,5 @@ plot6 <- plot6 + labs(title="Emissions from motor vehicles related sources in Ba
 
 print(plot6)
 
-dev.copy(png,"plot5.png", width = 480, height = 480, bg = "transparent")
+dev.copy(png,"plot6.png", width = 480, height = 480, bg = "transparent")
 dev.off()

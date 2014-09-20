@@ -23,7 +23,7 @@ if (!exists("SCC") | !exists("NEI")) {
 }
 
 #Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999–2008 for Baltimore City? Which have seen increases in emissions from 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.
-install.packages("ggplot2")
+#install.packages("ggplot2")
 library(ggplot2)
 
 PM2.5_Baltimore <- subset(NEI, fips == "24510")
